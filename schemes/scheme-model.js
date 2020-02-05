@@ -19,8 +19,9 @@ ON steps.scheme_id = schemes.id;
 
   return db('steps')
     .join('schemes', 'steps.scheme_id', 'schemes.id')
-    .select('schemes.scheme_name', 'steps.instructions')
-    .where({ scheme_id: id });
+    .select('schemes.scheme_name', 'steps.step_number', 'steps.instructions')
+    .where({ scheme_id: id })
+    .orderBy('steps.step_number');
 }
 
 function add(scheme) {
