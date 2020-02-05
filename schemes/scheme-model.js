@@ -10,7 +10,17 @@ function findById(id) {
 }
 
 function findSteps(id) {
+{/*
+SELECT schemes.scheme_name, steps.instructions
+FROM steps
+JOIN schemes
+ON steps.scheme_id = schemes.id; 
+*/}
 
+  return db('steps')
+    .join('schemes', 'steps.scheme_id', 'schemes.id')
+    .select('schemes.scheme_name', 'steps.instructions')
+    .where({ scheme_id: id });
 }
 
 function add(scheme) {
