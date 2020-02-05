@@ -46,7 +46,7 @@ router.get('/:id/steps', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const schemeData = req.body;
 
   Schemes.add(schemeData)
@@ -87,7 +87,9 @@ router.put('/:id', (req, res) => {
     if (scheme) {
       Schemes.update(changes, id)
       .then(updatedScheme => {
-        res.json(updatedScheme);
+        res.json({
+          rowsUpdated: updatedScheme
+        });
       });
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id' });
